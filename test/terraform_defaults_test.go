@@ -5,7 +5,6 @@ import (
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 	"log"
 	"os"
-	"path"
 	"testing"
 )
 
@@ -14,21 +13,19 @@ func TestTerraformDefaults(t *testing.T) {
 
 	exampleFolder := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/defaults")
 
-	cwd, err := os.Getwd()
+	k8sSpId := os.Getenv("ARM_K8S_SP_ID")
+	k8sSpSec := os.Getenv("ARM_K8S_SP_SEC")
+
+	_, err := os.Getwd()
 	if err != nil {
 		log.Println(err)
 	}
 
-	fixturesDir := path.Join(cwd, "fixtures")
-	privateKeyPath := path.Join(fixturesDir, "./keys/id_rsa_test")
-	publicKeyPath := path.Join(fixturesDir, "./keys/id_rsa_test.pub")
-	generateKeys(privateKeyPath, publicKeyPath)
-
 	terraformOptions := &terraform.Options{
 		TerraformDir: exampleFolder,
 		Vars: map[string]interface{}{
-			"public_key_path":  publicKeyPath,
-			"private_key_path": privateKeyPath,
+			"k8s_sp_id_from_env": k8sSpId,
+			"k8s_sp_sec_from_env": k8sSpSec,
 		},
 	}
 
