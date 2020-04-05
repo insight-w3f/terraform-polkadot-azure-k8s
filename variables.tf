@@ -31,12 +31,6 @@ variable "owner" {
   default     = ""
 }
 
-variable "zone" {
-  description = "The Azure zone to deploy in"
-  type        = string
-  default     = "eastus1"
-}
-
 ########
 # Azure
 ########
@@ -44,12 +38,6 @@ variable "zone" {
 variable "azure_resource_group_name" {
   description = "Name of Azure Resource Group"
   type        = string
-}
-
-variable "location" {
-  description = "Name of Azure location"
-  type        = string
-  default     = "eastus"
 }
 
 ########
