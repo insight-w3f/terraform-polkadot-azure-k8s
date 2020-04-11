@@ -27,3 +27,14 @@ output "cluster_client_certificate" {
   description = "The base64 encoded public certificate used by clients to access the cluster"
   value       = azurerm_kubernetes_cluster.this.kube_config.0.client_certificate
 }
+
+output "username" {
+  description = "The cluster username"
+  value       = azurerm_kubernetes_cluster.this.kube_config.0.username
+}
+
+output "password" {
+  description = "The cluster password"
+  value       = azurerm_kubernetes_cluster.this.kube_config.0.password
+}
+

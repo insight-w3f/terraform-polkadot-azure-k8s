@@ -20,6 +20,22 @@ module "this" {
 
 }
 ```
+
+To use with the Terraform Helm provider, you will need to specify the following:
+
+```
+provider "helm" {
+  kubernetes {
+    host                   = module.cluster.endpoint
+    username               = module.cluster.username
+    password               = module.cluster.password
+    client_certificate     = base64decode(module.cluster.cluster_client_certificate)
+    client_key             = base64decode(module.cluster.cluster_client_key)
+    cluster_ca_certificate = base64decode(module.cluster.cluster_ca_cert)
+    load_config_file       = false
+  }
+}
+```
 ## Examples
 
 - [defaults](https://github.com/insight-w3f/terraform-polkadot-azure-k8s-cluster/tree/master/examples/defaults)
@@ -68,6 +84,8 @@ No requirements.
 | endpoint | The base URL of the API server on the Kubernetes master node |
 | id | A unique ID that can be used to identify and reference a Kubernetes cluster |
 | kube\_config | The full contents of the Kubernetes cluster's kubeconfig file |
+| password | The cluster password |
+| username | The cluster username |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
