@@ -72,6 +72,7 @@ No requirements.
 | num\_workers | Number of workers for worker pool | `number` | `1` | no |
 | owner | Owner of the infrastructure | `string` | `""` | no |
 | stage | The stage of the deployment | `string` | `""` | no |
+| vpc\_id | Name of the public VPC for the ASG nodes | `string` | `""` | no |
 | worker\_instance\_type | Instance type for workers | `string` | `"Standard_D2_v2"` | no |
 
 ## Outputs

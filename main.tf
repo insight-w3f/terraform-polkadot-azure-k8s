@@ -41,3 +41,38 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   tags = module.label.tags
 }
+
+data "azurerm_resource_group" "k8s" {
+  name = azurerm_kubernetes_cluster.this.node_resource_group
+}
+
+data "azurerm_resources" "k8s" {
+  resource_group_name = data.azurerm_resource_group.k8s.name
+  type                = "Microsoft.Network/virtualNetworks"
+}
+
+data "azurerm_virtual_network" "k8s" {
+  name                = data.azurerm_resources.k8s.resources[0].name
+  resource_group_name = data.azurerm_resource_group.k8s.name
+}
+
+data "azurerm_virtual_network" "public" {
+  name                = var.vpc_id
+  resource_group_name = var.azure_resource_group_name
+}
+
+resource "azurerm_virtual_network_peering" "public-k8s" {
+  name                      = "public-k8s"
+  remote_virtual_network_id = data.azurerm_virtual_network.k8s.id
+  resource_group_name       = var.azure_resource_group_name
+  virtual_network_name      = var.vpc_id
+  allow_forwarded_traffic   = true
+}
+
+resource "azurerm_virtual_network_peering" "k8s-public" {
+  name                      = "k8s-public"
+  remote_virtual_network_id = data.azurerm_virtual_network.public.id
+  resource_group_name       = data.azurerm_resource_group.k8s.name
+  virtual_network_name      = data.azurerm_virtual_network.k8s.name
+  allow_forwarded_traffic   = true
+}

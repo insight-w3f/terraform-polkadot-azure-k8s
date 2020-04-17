@@ -95,3 +95,9 @@ variable "k8s_azure_service_principal_secret" {
   description = "Secret for the service principal for the k8s cluster. This should NOT be the same as your deployment SP"
   type        = string
 }
+
+variable "vpc_id" {
+  description = "Name of the public VPC for the ASG nodes"
+  type        = string
+  default     = ""
+}
