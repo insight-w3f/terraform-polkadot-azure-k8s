@@ -1,40 +1,15 @@
 ########
 # Label
 ########
-variable "environment" {
-  description = "The environment"
-  type        = string
-  default     = ""
-}
-
-variable "namespace" {
-  description = "The namespace to deploy into"
-  type        = string
-  default     = ""
-}
-
-variable "stage" {
-  description = "The stage of the deployment"
-  type        = string
-  default     = ""
-}
-
-variable "network_name" {
-  description = "The network name, ie kusama / mainnet"
-  type        = string
-  default     = ""
-}
-
-variable "owner" {
-  description = "Owner of the infrastructure"
-  type        = string
-  default     = ""
+variable "tags" {
+  description = "Key value pair to tag all resources"
+  type        = map(string)
+  default     = {}
 }
 
 ########
 # Azure
 ########
-
 variable "azure_resource_group_name" {
   description = "Name of Azure Resource Group"
   type        = string
@@ -43,7 +18,6 @@ variable "azure_resource_group_name" {
 ########
 # K8S
 ########
-
 variable "cluster_name" {
   description = "Name of the k8s cluster"
   type        = string

@@ -1,17 +1,3 @@
-module "label" {
-  source = "github.com/robc-io/terraform-null-label.git?ref=0.16.1"
-  tags = {
-    NetworkName = var.network_name
-    Owner       = var.owner
-    Terraform   = true
-    VpcType     = "main"
-  }
-
-  environment = var.environment
-  namespace   = var.namespace
-  stage       = var.stage
-}
-
 data "azurerm_resource_group" "this" {
   name = var.azure_resource_group_name
 }
@@ -39,7 +25,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     client_secret = var.k8s_azure_service_principal_secret
   }
 
-  tags = module.label.tags
+  tags = var.tags
 }
 
 data "azurerm_resource_group" "k8s" {
