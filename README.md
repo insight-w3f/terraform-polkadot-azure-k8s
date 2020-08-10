@@ -44,10 +44,6 @@ provider "helm" {
 No issue is creating limit on this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
-
-No requirements.
-
 ## Providers
 
 | Name | Version |
@@ -57,21 +53,17 @@ No requirements.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+|------|-------------|------|---------|:-----:|
 | azure\_resource\_group\_name | Name of Azure Resource Group | `string` | n/a | yes |
 | cluster\_autoscale | Do you want the cluster's worker pool to autoscale? | `bool` | `false` | no |
 | cluster\_autoscale\_max\_workers | Maximum number of workers in worker pool | `number` | `1` | no |
 | cluster\_autoscale\_min\_workers | Minimum number of workers in worker pool | `number` | `1` | no |
 | cluster\_name | Name of the k8s cluster | `string` | `"cluster"` | no |
-| environment | The environment | `string` | `""` | no |
 | k8s\_azure\_service\_principal\_id | ID for the service principal for the k8s cluster. This should NOT be the same as your deployment SP | `string` | n/a | yes |
 | k8s\_azure\_service\_principal\_secret | Secret for the service principal for the k8s cluster. This should NOT be the same as your deployment SP | `string` | n/a | yes |
-| k8s\_version | Version of k8s to use - override to use a version other than `latest` | `string` | `null` | no |
-| namespace | The namespace to deploy into | `string` | `""` | no |
-| network\_name | The network name, ie kusama / mainnet | `string` | `""` | no |
+| k8s\_version | Version of k8s to use - override to use a version other than `latest` | `string` | n/a | yes |
 | num\_workers | Number of workers for worker pool | `number` | `1` | no |
-| owner | Owner of the infrastructure | `string` | `""` | no |
-| stage | The stage of the deployment | `string` | `""` | no |
+| tags | Key value pair to tag all resources | `map(string)` | `{}` | no |
 | vpc\_id | Name of the public VPC for the ASG nodes | `string` | `""` | no |
 | worker\_instance\_type | Instance type for workers | `string` | `"Standard_D2_v2"` | no |
 
