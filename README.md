@@ -78,6 +78,8 @@ No issue is creating limit on this module.
 | id | A unique ID that can be used to identify and reference a Kubernetes cluster |
 | kube\_config | The full contents of the Kubernetes cluster's kubeconfig file |
 | password | The cluster password |
+| resource\_group | Name of the resource group where cluster resources are |
+| scale\_set | n/a |
 | username | The cluster username |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

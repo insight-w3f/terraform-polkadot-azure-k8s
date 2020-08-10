@@ -1,3 +1,8 @@
+data "azurerm_resources" "scale_set" {
+  resource_group_name = azurerm_kubernetes_cluster.this.node_resource_group
+  type                = "Microsoft.Compute/virtualMachineScaleSets"
+}
+
 output "id" {
   description = "A unique ID that can be used to identify and reference a Kubernetes cluster"
   value       = azurerm_kubernetes_cluster.this.id
@@ -5,7 +10,7 @@ output "id" {
 
 output "endpoint" {
   description = "The base URL of the API server on the Kubernetes master node"
-  value       = azurerm_kubernetes_cluster.this.fqdn
+  value       = azurerm_kubernetes_cluster.this.kube_config.0.host
 }
 
 output "kube_config" {
@@ -38,3 +43,11 @@ output "password" {
   value       = azurerm_kubernetes_cluster.this.kube_config.0.password
 }
 
+output "resource_group" {
+  description = "Name of the resource group where cluster resources are"
+  value       = azurerm_kubernetes_cluster.this.node_resource_group
+}
+
+output "scale_set" {
+  value = join(",", data.azurerm_resources.scale_set.resources.*.name)
+}
